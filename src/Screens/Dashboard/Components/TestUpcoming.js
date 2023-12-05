@@ -6,11 +6,11 @@ const TestUpcoming = () => {
         <div>
           <p className="font-bold">Tests Upcoming</p>
         </div>
-        <div className="grid grid-cols-2 gap-1 p-2">
+        <div className="grid grid-cols-1 gap-1 p-2 w-64">
           <div
             className={`${myList.at(
               0
-            )} w-32 h-32 flex items-center justify-center`}
+            )} w-auto h-32 flex items-center justify-center`}
           >
             <p>Test1</p>
           </div>
@@ -18,23 +18,9 @@ const TestUpcoming = () => {
           <div
             className={`${myList.at(
               1
-            )}  w-32 h-32 flex items-center justify-center`}
+            )}  w-auto h-32 flex items-center justify-center`}
           >
             <p>Test2</p>
-          </div>
-          <div
-            className={`${myList.at(
-              2
-            )}  w-32 h-32 flex items-center justify-center`}
-          >
-            <p>Test3</p>
-          </div>
-          <div
-            className={`${myList.at(
-              3
-            )}  w-32 h-32 flex items-center justify-center`}
-          >
-            <p>Test4</p>
           </div>
         </div>
       </div>
