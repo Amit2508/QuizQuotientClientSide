@@ -3,13 +3,14 @@ import bright from "../../Icons/brightness.png";
 import night from "../../Icons/night.png";
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ updateState }) => {
   const [darknessState, setDarknessState] = useState(0);
   const [imageSet, setImageSet] = useState(bright);
   const [backGroundColor, setBackGroundColor] = useState("bg-white");
   const [text, setText] = useState("text-black");
 
   const handleLightClickListener = () => {
+    updateState(darknessState === 0 ? 1 : 0);
     if (darknessState === 0) {
       setDarknessState(1);
       setImageSet(bright);
