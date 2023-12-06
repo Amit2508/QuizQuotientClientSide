@@ -2,7 +2,7 @@ const TestUpcoming = () => {
   let myList = ["bg-pink-600", "bg-red-500", "bg-pink-400", "bg-orange-500"];
   return (
     <>
-      <div className="inline-block p-4 m-2 shadow-xl rounded-xl bg-white">
+      <div className="inline-block p-4 m-2 shadow-xl rounded-xl shadow-sky-500 bg-white">
         <div>
           <p className="font-bold">Tests Upcoming</p>
         </div>
