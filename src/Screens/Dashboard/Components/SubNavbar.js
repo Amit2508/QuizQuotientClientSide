@@ -9,7 +9,7 @@ const SubNavbar = () => {
           <p className="text-xl font-bold sm:text-5xl">User</p>
         </div>
         <div>
-          <img src={illustration1} className="w-96 h-64 sm:w-full sm:h-96" />
+          <img src={illustration1} className="w-96 h-64 sm:w-auto sm:h-96" />
         </div>
       </div>
     </>
