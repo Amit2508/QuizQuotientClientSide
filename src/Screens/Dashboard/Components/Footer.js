@@ -39,9 +39,9 @@ const Footer = () => {
               <p className="text-white">facebook.com</p>
             </div>
             <div className="flex items-center gap-x-2 mt-1">
-                <div className="bg-blue-300 mt-1">
-                   <img src={twitter} className="w-8 h-8" /> 
-                </div>
+              <div className="bg-red-600 mt-1">
+                <img src={twitter} className="w-8 h-8" />
+              </div>
               <p className="text-white">twitter.com</p>
             </div>
           </div>
