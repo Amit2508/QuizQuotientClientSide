@@ -47,10 +47,10 @@ const Dashboard = () => {
         }}
       >
         <div className="flex-grow">
-          <TestGiven />
+          <TestGiven getState={darknessState}/>
         </div>
         <div className="flex-grow">
-          <TestUpcoming />
+          <TestUpcoming getState={darknessState} />
         </div>
       </div>
       <div className="mt-12">
