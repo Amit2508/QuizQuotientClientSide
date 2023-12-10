@@ -1,28 +1,53 @@
-import userPhoto from "../../Icons/profile.png";
-import bright from "../../Icons/brightness.png";
-import night from "../../Icons/night.png";
-import { useState } from "react";
+import userPhoto from "../Icons/profile.png";
+import bright from "../Icons/brightness.png";
+import night from "../Icons/night.png";
+import { useDebugValue, useEffect, useState } from "react";
 
 const Navbar = ({ updateState }) => {
-  const [darknessState, setDarknessState] = useState(0);
+  let get_darknessState = localStorage.getItem("web_state");
+  if (get_darknessState === null) {
+    get_darknessState = 0;
+  }
+  const [darknessState, setDarknessState] = useState(
+    parseInt(get_darknessState)
+  );
   const [imageSet, setImageSet] = useState(bright);
   const [backGroundColor, setBackGroundColor] = useState("bg-white");
   const [text, setText] = useState("text-black");
 
   const handleLightClickListener = () => {
-    updateState(darknessState === 0 ? 1 : 0);
+    const newDarknessState = updateState(darknessState === 0 ? 1 : 0);
+    updateState(newDarknessState);
     if (darknessState === 0) {
+      localStorage.setItem("web_state", JSON.stringify(0));
       setDarknessState(1);
       setImageSet(bright);
       setBackGroundColor("bg-white");
       setText("text-black");
     } else {
+      localStorage.setItem("web_state", JSON.stringify(1));
       setDarknessState(0);
       setImageSet(night);
       setBackGroundColor("bg-slate-800");
       setText("text-white");
     }
   };
+
+  useEffect(() => {
+    if (darknessState === 0) {
+      localStorage.setItem("web_state", JSON.stringify(0));
+      setDarknessState(1);
+      setImageSet(bright);
+      setBackGroundColor("bg-white");
+      setText("text-black");
+    } else {
+      localStorage.setItem("web_state", JSON.stringify(1));
+      setDarknessState(0);
+      setImageSet(night);
+      setBackGroundColor("bg-slate-800");
+      setText("text-white");
+    }
+  }, []);
 
   return (
     <>
