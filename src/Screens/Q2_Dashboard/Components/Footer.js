@@ -18,11 +18,11 @@ const Footer = () => {
           <p className="font-bold text-white">Contact us</p>
           <div>
             <div className="flex items-center gap-x-2 mt-2">
-              <img src={mail} className="w-8 h-8" />
+              <img src={mail} alt={`mail`} className="w-8 h-8" />
               <p className="text-white">YourEmail@XYZ.com</p>
             </div>
             <div className="flex items-center gap-x-2 mt-1">
-              <img src={telephone} className="w-8 h-8" />
+              <img src={telephone} alt={`telephone`} className="w-8 h-8" />
               <p className="text-white">999999999</p>
             </div>
           </div>
@@ -31,16 +31,16 @@ const Footer = () => {
           <p className="font-bold text-white">Socials</p>
           <div>
             <div className="flex items-center gap-x-2 mt-2">
-              <img src={linkedin} className="w-8 h-8" />
+              <img src={linkedin} alt={`linkedin`} className="w-8 h-8" />
               <p className="text-white">linkedin.com</p>
             </div>
             <div className="flex items-center gap-x-2 mt-1">
-              <img src={facebook} className="w-8 h-8" />
+              <img src={facebook} alt={`facebook`} className="w-8 h-8" />
               <p className="text-white">facebook.com</p>
             </div>
             <div className="flex items-center gap-x-2 mt-1">
               <div className="bg-red-600 mt-1">
-                <img src={twitter} className="w-8 h-8" />
+                <img src={twitter} alt={`twitter`} className="w-8 h-8" />
               </div>
               <p className="text-white">twitter.com</p>
             </div>
