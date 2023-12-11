@@ -2,7 +2,7 @@ import Navbar from "../Components/Navbar";
 import SubNavbar from "./Components/SubNavbar";
 import TestGiven from "./Components/TestGiven";
 import TestUpcoming from "./Components/TestUpcoming";
-import Footer from "./Components/Footer";
+import Footer from "../Components/Footer";
 import { useEffect, useState } from "react";
 const Dashboard = () => {
   let get_darknessState = localStorage.getItem("web_state");
