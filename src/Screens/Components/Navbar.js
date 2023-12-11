@@ -1,7 +1,7 @@
 import userPhoto from "../Icons/profile.png";
 import bright from "../Icons/brightness.png";
 import night from "../Icons/night.png";
-import { useDebugValue, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 
 const Navbar = ({ updateState }) => {
   let get_darknessState = localStorage.getItem("web_state");
@@ -60,9 +60,10 @@ const Navbar = ({ updateState }) => {
         <div className="ml-auto flex space-x-2 p-2 items-center text-sm sm:space-x-8 sm:text-lg">
           <p className={`${text} font-bold cursor-pointer`}>Home</p>
           <p className={`${text} font-bold cursor-pointer`}>Settings</p>
-          <img src={userPhoto} className="w-8 h-8 cursor-pointer" />
+          <img src={userPhoto} alt={``} className="w-8 h-8 cursor-pointer" />
           <img
             src={imageSet}
+            alt={``} 
             className="w-8 h-8 cursor-pointer"
             onClick={() => handleLightClickListener()}
           />
