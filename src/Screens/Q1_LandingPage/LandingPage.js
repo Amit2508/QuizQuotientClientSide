@@ -38,7 +38,7 @@ const LandingPage = () => {
     <>
       <div className={`${bgColor}`}>
         <div>
-          <Navbar updateState={updateState} />
+          <Navbar updateState={updateState} screen={'Landing'}/>
         </div>
         <div>
           <SubNavbar getState={darknessState} />
