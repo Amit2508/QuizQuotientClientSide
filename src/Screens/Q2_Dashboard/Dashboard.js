@@ -43,7 +43,7 @@ const Dashboard = () => {
   return (
     <div className={`flex flex-col min-h-screen ${bgColor}`}>
       <div>
-        <Navbar updateState={updateState} />
+        <Navbar updateState={updateState} screen={'Dashboard'}/>
       </div>
       <div>
         <SubNavbar getState={darknessState} />
