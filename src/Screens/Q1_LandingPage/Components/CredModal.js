@@ -55,70 +55,68 @@ const CredModal = ({ action, getStatus }) => {
   return (
     <>
       {getStatus && (
-        <>
-          <div className={`bg-blue-200 p-2 rounded-lg shadow-xl`}>
-            <button onClick={() => getStatus(false)} className={`flex bg-gray-100 p-1 rounded-sm font-bold`}>X</button>
-            <div className={`flex flex-col`}>
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-opacity-50 bg-gray-500">
+          <div className="bg-blue-200 p-4 rounded-lg shadow-xl">
+            <button onClick={() => getStatus(false)} className="flex bg-gray-100 p-1 rounded-sm font-bold">
+              X
+            </button>
+            <div className="flex flex-col">
               <p>{title}</p>
               <input
-                placeholder={`Enter Email`}
+                placeholder="Enter Email"
                 value={email}
-                type={`email`}
+                type="email"
                 onChange={emailHandle}
-                className={`p-2 m-2 rounded-lg`}
-              ></input>
+                className="p-2 m-2 rounded-lg"
+              />
               <input
-                placeholder={`Enter password`}
+                placeholder="Enter password"
                 value={password}
-                type={`password`}
+                type="password"
                 onChange={passHandler}
-                className={`p-2 m-2 rounded-lg`}
-              ></input>
+                className="p-2 m-2 rounded-lg"
+              />
               {confirmPassVisible && (
                 <input
-                  placeholder={`Re-enter your password`}
+                  placeholder="Re-enter your password"
                   value={repass}
-                  type={`password`}
+                  type="password"
                   onChange={repassHandler}
-                  className={`p-2 m-2 rounded-lg`}
-                ></input>
+                  className="p-2 m-2 rounded-lg"
+                />
               )}
               {nameVisible && (
                 <input
-                  placeholder={`Enter your name`}
+                  placeholder="Enter your name"
                   value={name}
                   onChange={nameHandler}
-                  className={`p-2 m-2 rounded-lg`}
-                ></input>
+                  className="p-2 m-2 rounded-lg"
+                />
               )}
               {ageVisible && (
                 <input
-                  placeholder={`Enter Your age`}
+                  placeholder="Enter Your age"
                   value={age}
-                  type={`number`}
+                  type="number"
                   onChange={ageHandler}
-                  className={`p-2 m-2 rounded-lg`}
-                ></input>
+                  className="p-2 m-2 rounded-lg"
+                />
               )}
             </div>
-            <div
-              className={`bg-blue-600 m-2 p-1 -block rounded-lg cursor-pointer hover:bg-blue-400`}
-            >
-              <p className={`text-white`}>{title}</p>
+            <div className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400">
+              <p className="text-white">{title}</p>
             </div>
             <div>
-              <p className={`p-2 m-2 rounded-lg`}> {subtitle}</p>
+              <p className="p-2 m-2 rounded-lg"> {subtitle}</p>
             </div>
-            <div className={`inline-block`}>
-              <div
-                className={`flex bg-gray-50 p-2 justify-center rounded-xl shadow-2xl cursor-pointer`}
-              >
-                <img src={google} alt={`Google`} className={`w-8 h-8`} />
-                <p className={`ms-2`}>{googleAction}</p>
+            <div className="inline-block">
+              <div className="flex bg-gray-50 p-2 justify-center rounded-xl shadow-2xl cursor-pointer">
+                <img src={google} alt="Google" className="w-8 h-8" />
+                <p className="ms-2">{googleAction}</p>
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </>
   );
