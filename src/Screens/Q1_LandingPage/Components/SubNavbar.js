@@ -5,7 +5,7 @@ import CredModal from "./CredModal";
 
 const SubNavbar = ({ getState }) => {
   const [bg, setBg] = useState("bg-steelblue-200");
-  const [bg1, setBg1] = useState("text-blue-400");
+  const [bg1, setBg1] = useState("text-yellow-500");
   const [state, setState] = useState(getState);
   const [action, setAction] = useState("");
   const [modal, showModal] = useState(false);
@@ -17,7 +17,7 @@ const SubNavbar = ({ getState }) => {
   useEffect(() => {
     if (state === 0) {
       setBg("bg-steelblue-200");
-      setBg1("text-blue-400");
+      setBg1("text-yellow-500");
     } else if (state === 1) {
       setBg("bg-slate-800");
       setBg1("text-white");
