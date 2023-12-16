@@ -5,7 +5,7 @@ import CredModal from "./CredModal";
 
 const SubNavbar = ({ getState }) => {
   const [bg, setBg] = useState("bg-steelblue-200");
-  const [bg1, setBg1] = useState("text-blue-400");
+  const [bg1, setBg1] = useState("text-yellow-500");
   const [state, setState] = useState(getState);
   const [action, setAction] = useState("");
   const [modal, showModal] = useState(false);
@@ -17,7 +17,7 @@ const SubNavbar = ({ getState }) => {
   useEffect(() => {
     if (state === 0) {
       setBg("bg-steelblue-200");
-      setBg1("text-blue-400");
+      setBg1("text-yellow-500");
     } else if (state === 1) {
       setBg("bg-slate-800");
       setBg1("text-white");
@@ -38,7 +38,9 @@ const SubNavbar = ({ getState }) => {
           <img src={BackGround1} alt={`Background`} className="h-full" />
         </div>
         <div className={`absolute w-full h-full inset-0 z-20`}>
-          <div className={`flex justify-evenly items-center p-4`}>
+          <div
+            className={`sm:flex sm:flex-row flex justify-evenly items-center p-4`}
+          >
             <div>
               <p
                 className={`sm:text-5xl text-2xl ${bg1} rounded-t-2xl p-2 bg-opacity-40 font-bold `}
@@ -66,7 +68,7 @@ const SubNavbar = ({ getState }) => {
               </div>
             </div>
             <div className={`block`}>
-              <img src={actor} alt={`actor`} className={`-z-20`} />
+              <img src={actor} alt={`actor`} className={`sm:block hidden`} />
             </div>
             <div>
               {modal && <CredModal action={action} getStatus={showModal} />}
