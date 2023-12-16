@@ -38,7 +38,9 @@ const SubNavbar = ({ getState }) => {
           <img src={BackGround1} alt={`Background`} className="h-full" />
         </div>
         <div className={`absolute w-full h-full inset-0 z-20`}>
-          <div className={`flex justify-evenly items-center p-4`}>
+          <div
+            className={`sm:flex sm:flex-row flex justify-evenly items-center p-4`}
+          >
             <div>
               <p
                 className={`sm:text-5xl text-2xl ${bg1} rounded-t-2xl p-2 bg-opacity-40 font-bold `}
@@ -66,7 +68,7 @@ const SubNavbar = ({ getState }) => {
               </div>
             </div>
             <div className={`block`}>
-              <img src={actor} alt={`actor`} className={`-z-20`} />
+              <img src={actor} alt={`actor`} className={`sm:block hidden`} />
             </div>
             <div>
               {modal && <CredModal action={action} getStatus={showModal} />}
