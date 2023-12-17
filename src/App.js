@@ -1,10 +1,21 @@
 import "./App.css";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./Screens/Q1_LandingPage/LandingPage";
 import Dashboard from "./Screens/Q2_Dashboard/Dashboard";
 import QuizScreen from "./Screens/Q3_QuizScreen/QuizScreen";
-
 function App() {
+   const [getState, setGetState] = useState(() => {
+    const storedState = parseInt(localStorage.getItem('web_state'));
+    return isNaN(storedState) ? 0 : storedState;
+  });
+
+  useEffect(() => {
+    document.documentElement.style.backgroundColor =
+      getState === 0 || isNaN(getState) ? '#FFF' : '#1e293b';
+  }, [getState]);
+  
+
   return (
     <div className="App">
       <Router>
