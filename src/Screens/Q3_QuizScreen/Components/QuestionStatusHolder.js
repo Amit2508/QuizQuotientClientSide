@@ -39,15 +39,21 @@ const QuestionStatusHolder = ({ state }) => {
           {generateQuestionHolder()}
         </div>
         <div className={`sm:mt-6 mt-2 sm:p-2 p-1`}>
-          <div className={`flex sm:flex sm:flex-row flex-col items-center m-2 sm:justify-between`}>
+          <div
+            className={`flex sm:flex sm:flex-row flex-col items-center m-2 sm:justify-between`}
+          >
             <div className={`w-12 h-12 bg-yellow-200 rounded-lg`}></div>
             <p className={`${text} ms-2`}>0 - Unattempted</p>
           </div>
-          <div className={`flex sm:flex sm:flex-row flex-col items-center m-2 sm:justify-between`}>
+          <div
+            className={`flex sm:flex sm:flex-row flex-col items-center m-2 sm:justify-between`}
+          >
             <div className={`w-12 h-12 bg-green-200 rounded-lg`}></div>
             <p className={`${text}`}>0 - Attempted</p>
           </div>
-          <div className={`flex sm:flex sm:flex-row flex-col items-center m-2 sm:justify-between`}>
+          <div
+            className={`flex sm:flex sm:flex-row flex-col items-center m-2 sm:justify-between`}
+          >
             <div className={`w-12 h-12 bg-blue-200 rounded-lg`}></div>
             <p className={`${text}`}>0 - Review</p>
           </div>
