@@ -50,7 +50,7 @@ const TestUpcoming = ({ getState }) => {
               className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
               onClick={() => activateModal()}
             ></div>
-            <p className="z-10 font-bold text-white onClick={()=>activateModal()">
+            <p className="font-bold text-white onClick={()=>activateModal()">
               Test1
             </p>
           </div>
@@ -63,7 +63,7 @@ const TestUpcoming = ({ getState }) => {
               className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
               onClick={() => activateModal()}
             ></div>
-            <p className="z-10 font-bold text-white">Test2</p>
+            <p className="font-bold text-white">Test2</p>
           </div>
           <div>{Modal && <TestInfoModal modalOpen={ShowModal} />}</div>
         </div>

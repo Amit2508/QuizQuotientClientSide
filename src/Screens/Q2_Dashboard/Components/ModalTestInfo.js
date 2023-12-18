@@ -1,4 +1,11 @@
+import { useNavigate } from "react-router-dom";
+
 const TestInfoModal = ({ modalOpen }) => {
+  const Navigate = useNavigate();
+
+  const handleNavigation = () => {
+    Navigate("/quiz");
+  };
   return (
     <>
       {modalOpen && (
@@ -32,7 +39,7 @@ const TestInfoModal = ({ modalOpen }) => {
             </div>
                 
             <div
-              className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400"
+              className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400" onClick={()=>handleNavigation()}
             >
               <p className="text-white">Enroll Now</p>
             </div>

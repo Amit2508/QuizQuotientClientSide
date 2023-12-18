@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import google from "../../Icons/google.png";
+import { useNavigate } from "react-router-dom";
 
 const CredModal = ({ action, getStatus }) => {
   const [visiblityArray, setVisiblityArray] = useState(false);
@@ -114,6 +115,11 @@ const CredModal = ({ action, getStatus }) => {
     return inputFields;
   };
 
+  const Navigate = useNavigate();
+  const handleNavigation = () =>{
+   Navigate('/home'); 
+  }
+
   return (
     <>
       {getStatus && (
@@ -136,7 +142,7 @@ const CredModal = ({ action, getStatus }) => {
             </div>
             <div
               className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400"
-              onClick={() => onPress(name, age, email, password)}
+              onClick={() => handleNavigation()}
             >
               <p className="text-white">{title}</p>
             </div>
