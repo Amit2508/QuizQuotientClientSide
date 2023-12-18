@@ -1,4 +1,4 @@
-import { useDebugValue, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GetQuestionsID } from "../Scripts/QuestionDetailsPuller";
 const QuestionStatusHolder = ({ state }) => {
   const [text, setText] = useState("text-black");
