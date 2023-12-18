@@ -32,17 +32,19 @@ const TestInfoModal = ({ modalOpen }) => {
               </div>
             </div>
             <div className={`m-2 p-2`}>
+              <div className={`m-2 p-2`}>
+                <p className={`font-bold`}>
+                  Test Date & Time - 14th January 2023{" "}
+                </p>
+                <p className={`font-bold`}>2:30 pm to 3:30 pm </p>
+              </div>
 
-            <div className={`m-2 p-2`}>
-              <p className={`font-bold`}>Test Date & Time - 14th January 2023 </p>
-              <p className={`font-bold`}>2:30 pm to 3:30 pm </p>
-            </div>
-                
-            <div
-              className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400" onClick={()=>handleNavigation()}
-            >
-              <p className="text-white">Enroll Now</p>
-            </div>
+              <div
+                className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400"
+                onClick={() => handleNavigation()}
+              >
+                <p className="text-white">Enroll Now</p>
+              </div>
             </div>
           </div>
         </div>
