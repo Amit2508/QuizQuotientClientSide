@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import google from "../../Icons/google.png";
 import { useNavigate } from "react-router-dom";
+import { GoogleSignInProvider } from "../Scripts/googlesignin";
 
 const CredModal = ({ action, getStatus }) => {
   const [visiblityArray, setVisiblityArray] = useState(false);
@@ -116,9 +117,9 @@ const CredModal = ({ action, getStatus }) => {
   };
 
   const Navigate = useNavigate();
-  const handleNavigation = () =>{
-   Navigate('/home'); 
-  }
+  const handleNavigation = () => {
+    Navigate("/home");
+  };
 
   return (
     <>
@@ -151,8 +152,9 @@ const CredModal = ({ action, getStatus }) => {
             </div>
             <div className="inline-block">
               <div className="flex bg-gray-50 p-2 justify-center rounded-xl shadow-2xl cursor-pointer">
-                <img src={google} alt="Google" className="w-8 h-8" />
-                <p className="ms-2">{googleAction}</p>
+                <div>
+                  <GoogleSignInProvider />
+                </div>
               </div>
             </div>
           </div>
