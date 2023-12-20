@@ -4,11 +4,26 @@ import TestGiven from "./Components/TestGiven";
 import TestUpcoming from "./Components/TestUpcoming";
 import Footer from "../Components/Footer";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   let get_darknessState = localStorage.getItem("web_state");
   if (get_darknessState === null) {
     get_darknessState = 0;
   }
+  const Navigate = useNavigate();
+  const get_access = Cookies.get("ACCESS_TOKEN");
+
+  useEffect(() => {
+    if (get_access === undefined) {
+      Navigate("/landing");
+    }
+    if (get_access !== undefined) {
+      if (get_access.length <= 20) {
+        Navigate("/landing");
+      }
+    }
+  }, []);
 
   const [darknessState, setDarknessState] = useState(
     parseInt(get_darknessState)
@@ -43,7 +58,7 @@ const Dashboard = () => {
   return (
     <div className={`flex flex-col min-h-screen ${bgColor}`}>
       <div>
-        <Navbar updateState={updateState} screen={'Dashboard'}/>
+        <Navbar updateState={updateState} screen={"Dashboard"} />
       </div>
       <div>
         <SubNavbar getState={darknessState} />
