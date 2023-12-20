@@ -43,27 +43,11 @@ const TestUpcoming = ({ getState }) => {
         <div className="grid grid-cols-1 gap-12 p-2 w-64">
           <div
             className={`${myList.at(
-              0
-            )} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-pink-600 hover:shadow-pink-700 hover:cursor-pointer`}
-          >
-            <div
-              className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
-              onClick={() => activateModal()}
-            ></div>
-            <p className="font-bold text-white onClick={()=>activateModal()">
-              Test1
-            </p>
-          </div>
-          <div
-            className={`${myList.at(
               1
             )} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-red-500 hover:shadow-red-600 hover:cursor-pointer`}
           >
-            <div
-              className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
-              onClick={() => activateModal()}
-            ></div>
-            <p className="font-bold text-white">Test2</p>
+            <div className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"></div>
+            <p className="font-bold text-white">No upcoming tests</p>
           </div>
           <div>{Modal && <TestInfoModal modalOpen={ShowModal} />}</div>
         </div>
