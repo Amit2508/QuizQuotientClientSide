@@ -4,6 +4,8 @@ import night from "../Icons/night.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import { insert_old_jwt } from "../../Firebase/googleSignInScript";
 
 const Navbar = ({ updateState, screen }) => {
   let get_darknessState = localStorage.getItem("web_state");
@@ -18,6 +20,16 @@ const Navbar = ({ updateState, screen }) => {
   const [backGroundColor, setBackGroundColor] = useState("bg-white");
   const [text, setText] = useState("text-black");
   const [items, setItems] = useState([]);
+  const [imageURL, setImageURL] = useState('');
+
+  const token = Cookies.get('ACCESS_TOKEN');
+  useEffect(()=>{
+    if(token!==undefined && token.length>10){
+      const decode = jwtDecode(token);
+      const image_url = decode.picture;
+      setImageURL(image_url);
+    }
+  },[])
 
   const handleLightClickListener = () => {
     const newDarknessState = updateState(darknessState === 0 ? 1 : 0);
@@ -71,8 +83,8 @@ const Navbar = ({ updateState, screen }) => {
   const Navigate = useNavigate();
   const handleLogout = () =>{
     const data = Cookies.get('ACCESS_TOKEN');
-    console.log("this is the data", data);
-    if(data!=null){
+    if(data!=null && data.length>10){
+      insert_old_jwt(data)
       Cookies.remove('ACCESS_TOKEN');
       Navigate('/landing');
     }
@@ -96,8 +108,8 @@ const Navbar = ({ updateState, screen }) => {
               {item}
             </p>
           ))}
-          <img src={userPhoto} alt={``} 
-          className="w-8 h-8 cursor-pointer"
+          <img src={imageURL.length===0? userPhoto:imageURL} alt={``} 
+          className="w-8 h-8 rounded-2xl cursor-pointer"
           onClick={()=>handleLogout()}
           />
           <img

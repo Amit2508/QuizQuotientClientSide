@@ -20,7 +20,6 @@ const SubNavbar = ({ getState }) => {
         const decode_data = jwtDecode(GET_TOKEN);
         const data1 = decode_data.given_name;
         const data2 = decode_data.family_name;
-
         const c_name = data1 + " " + data2;
         setName(c_name);
       }else{
