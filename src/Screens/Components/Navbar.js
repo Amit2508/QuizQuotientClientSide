@@ -3,6 +3,7 @@ import bright from "../Icons/brightness.png";
 import night from "../Icons/night.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Navbar = ({ updateState, screen }) => {
   let get_darknessState = localStorage.getItem("web_state");
@@ -67,6 +68,16 @@ const Navbar = ({ updateState, screen }) => {
     navigate(`/${new_item}`);
   };
 
+  const Navigate = useNavigate();
+  const handleLogout = () =>{
+    const data = Cookies.get('ACCESS_TOKEN');
+    console.log("this is the data", data);
+    if(data!=null){
+      Cookies.remove('ACCESS_TOKEN');
+      Navigate('/landing');
+    }
+  }
+
   return (
     <>
       <div className={`flex p-4 items-center ${backGroundColor}`}>
@@ -85,7 +96,10 @@ const Navbar = ({ updateState, screen }) => {
               {item}
             </p>
           ))}
-          <img src={userPhoto} alt={``} className="w-8 h-8 cursor-pointer" />
+          <img src={userPhoto} alt={``} 
+          className="w-8 h-8 cursor-pointer"
+          onClick={()=>handleLogout()}
+          />
           <img
             src={imageSet}
             alt={``}
