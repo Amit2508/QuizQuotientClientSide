@@ -10,6 +10,7 @@ const Settings = () => {
   const [phone, setPhone] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [Class, setClass] = useState("");
   const [school, setSchool] = useState("");
 
   const placeholder = [
@@ -20,9 +21,10 @@ const Settings = () => {
     "Enter City",
     "Enter phone number",
     "Enter School/University(if applicable)",
+    "Enter Your Grade"
   ];
-  const value = [email, name, age, city, state, phone, school];
-  const type = ["email", "text", "number", "text", "text", "number", "text"];
+  const value = [email, name, age, city, state, phone, school, Class];
+  const type = ["email", "text", "number", "text", "text", "number", "text", "text"];
 
   const handleChangeFunctions = [
     (e) => setEmail(e.target.value),
@@ -32,6 +34,7 @@ const Settings = () => {
     (e) => setState(e.target.value),
     (e) => setPhone(e.target.value),
     (e) => setSchool(e.target.value),
+    (e) => setClass(e.target.value)
     ,
   ];
   const RenderInputField = () => {
@@ -67,7 +70,7 @@ const Settings = () => {
           </button>
           <div className="flex flex-col">
             <div className={`font-bold mb-4`}>
-              <p>Settings</p>
+              <p>Settings/Update Profile</p>
             </div>
 
             <div className={`sm:grid sm:grid-cols-2 sm:gap-4 flex flex-col`}>
