@@ -27,3 +27,4 @@ firebase.json
 .firebaserc
 
 Credentials.json
+src/Firebase/config.js
