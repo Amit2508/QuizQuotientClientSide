@@ -1,17 +1,19 @@
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
 import Credentials from "../../Credentials.json";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { find_create_user } from "../../../Firebase/googleSignInScript";
 import { jwtDecode } from "jwt-decode";
-
 export function GoogleSignInProvider() {
   const Navigate = useNavigate();
-  function handleCallbackResponse(response) {
-    console.log("this is the response", response.credential)
-    Cookies.set('ACCESS_TOKEN', response.credential);
-    Navigate('/home')
+  async function handleCallbackResponse (response) {
+    const token = response.credential;
+    const data = jwtDecode(token);
+    const first_name = data.given_name;
+    const last_name = data.family_name;
+    const email = data.email;
+    const complete_name = first_name+" "+last_name;
+    await find_create_user(email, complete_name, token)
+    Navigate('/home');
     if (response.error) {
       return;
     }
