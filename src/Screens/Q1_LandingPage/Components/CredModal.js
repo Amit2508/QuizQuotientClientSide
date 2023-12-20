@@ -15,6 +15,7 @@ const CredModal = ({ action, getStatus }) => {
   const [phone, setPhone] = useState();
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [Class, setClass] = useState("");
   const [school, setSchool] = useState("");
   const [subtitle, setSubtitle] = useState("");
   const [googleAction, setGoogleAction] = useState("");
@@ -46,6 +47,7 @@ const CredModal = ({ action, getStatus }) => {
     "Enter City",
     "Enter phone number",
     "Enter School/University(if applicable)",
+    "Enter your class",
   ];
   const value = [
     email,
@@ -57,6 +59,7 @@ const CredModal = ({ action, getStatus }) => {
     state,
     phone,
     school,
+    Class,
   ];
   const type = [
     "email",
@@ -68,10 +71,12 @@ const CredModal = ({ action, getStatus }) => {
     "text",
     "number",
     "text",
+    "text",
   ];
   const visiblity = [
     true,
     true,
+    visiblityArray,
     visiblityArray,
     visiblityArray,
     visiblityArray,
@@ -90,12 +95,9 @@ const CredModal = ({ action, getStatus }) => {
     (e) => setState(e.target.value),
     (e) => setPhone(e.target.value),
     (e) => setSchool(e.target.value),
+    (e) => setClass(e.target.value),
     ,
   ];
-
-  const onPress = (name, age, email, password) => {
-    console.log(name, age, email, password);
-  };
 
   const RenderInputField = () => {
     const inputFields = [];
@@ -151,7 +153,7 @@ const CredModal = ({ action, getStatus }) => {
               <p className="p-2 m-2 rounded-lg"> {subtitle}</p>
             </div>
             <div className="inline-block">
-              <div className="flex bg-gray-50 p-2 justify-center rounded-xl shadow-2xl cursor-pointer">
+              <div className="flex bg-gray-50  justify-center rounded-xl shadow-2xl cursor-pointer">
                 <div>
                   <GoogleSignInProvider />
                 </div>
