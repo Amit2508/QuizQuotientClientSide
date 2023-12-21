@@ -24,7 +24,7 @@ const Navbar = ({ updateState, screen }) => {
 
   const token = Cookies.get('ACCESS_TOKEN');
   useEffect(()=>{
-    if(token!==undefined && token.length>10){
+    if(token!==undefined && token.length>10 && token.substring(0,1)!=='{'){
       const decode = jwtDecode(token);
       const image_url = decode.picture;
       setImageURL(image_url);
