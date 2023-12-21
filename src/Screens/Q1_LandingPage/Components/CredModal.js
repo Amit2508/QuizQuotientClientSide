@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import google from "../../Icons/google.png";
+import { create_email_password_user } from "../../../Firebase/emailSignInScript";
 import { useNavigate } from "react-router-dom";
 import { GoogleSignInProvider } from "../Scripts/googlesignin";
+import { email_password_login } from "../../../Firebase/emailSignInScript";
 
 const CredModal = ({ action, getStatus }) => {
   const [visiblityArray, setVisiblityArray] = useState(false);
@@ -55,8 +56,8 @@ const CredModal = ({ action, getStatus }) => {
     repass,
     name,
     age,
-    city,
     state,
+    city,
     phone,
     school,
     Class,
@@ -91,12 +92,11 @@ const CredModal = ({ action, getStatus }) => {
     (e) => setRepass(e.target.value),
     (e) => setName(e.target.value),
     (e) => setAge(e.target.value),
-    (e) => setCity(e.target.value),
     (e) => setState(e.target.value),
+    (e) => setCity(e.target.value),
     (e) => setPhone(e.target.value),
     (e) => setSchool(e.target.value),
     (e) => setClass(e.target.value),
-    ,
   ];
 
   const RenderInputField = () => {
@@ -123,6 +123,65 @@ const CredModal = ({ action, getStatus }) => {
     Navigate("/home");
   };
 
+  async function HandleNewAccount(
+    email,
+    password,
+    repass,
+    name,
+    age,
+    state,
+    city,
+    number,
+    school,
+    Class
+  ) {
+    if (email.length < 2) {
+      alert("invalid email");
+    } else if (password.length < 8) {
+      alert("password should be of 8 or more characters");
+    } else if (repass !== password) {
+      alert("confirm password does not match");
+    } else if (name.length < 2) {
+      alert("invalid name");
+    } else if (age.length <= 0) {
+      alert("ivalid age");
+    } else if (state.length < 2) {
+      alert("invalid state length = ", state.length);
+    } else if (city.length < 2) {
+      alert("Invalid city");
+    } else if (number === undefined || number.length < 10) {
+      alert("Invalid Phone Number");
+    } else if (school.length < 2) {
+      alert("Invalid Schoold");
+    } else if (Class.length === 0) {
+      alert("invalid class");
+    } else {
+      await create_email_password_user(
+        email,
+        repass,
+        name,
+        age,
+        state,
+        city,
+        number,
+        school,
+        Class
+      );
+      Navigate('/home');
+    }
+  }
+
+  async function handleEmailLogin(email, password) {
+    if (email.length < 2) {
+      alert("Invalid Email");
+    } else if (password.length < 8) {
+      alert("Invalid password");
+    } else {
+      await email_password_login(email, password);
+      Navigate('/home');
+    }
+  }
+
   return (
     <>
       {getStatus && (
@@ -145,7 +204,23 @@ const CredModal = ({ action, getStatus }) => {
             </div>
             <div
               className="bg-blue-600 m-2 p-1 block rounded-lg cursor-pointer hover:bg-blue-400"
-              onClick={() => handleNavigation()}
+              onClick={
+                visiblityArray === true
+                  ? () =>
+                      HandleNewAccount(
+                        email,
+                        password,
+                        repass,
+                        name,
+                        age,
+                        state,
+                        city,
+                        phone,
+                        school,
+                        Class
+                      )
+                  : () => handleEmailLogin(email, password)
+              }
             >
               <p className="text-white">{title}</p>
             </div>
@@ -166,3 +241,7 @@ const CredModal = ({ action, getStatus }) => {
   );
 };
 export default CredModal;
+
+
+
+

@@ -17,13 +17,19 @@ const SubNavbar = ({ getState }) => {
     const GET_TOKEN = Cookies.get("ACCESS_TOKEN");
     if (GET_TOKEN !== undefined) {
       if (GET_TOKEN.length > 10) {
-        const decode_data = jwtDecode(GET_TOKEN);
-        const data1 = decode_data.given_name;
-        const data2 = decode_data.family_name;
-        const c_name = data1 + " " + data2;
-        setName(c_name);
-      }else{
-        Navigate('/landing')
+        if (GET_TOKEN.substring(0, 1) !== "{") {
+          const decode_data = jwtDecode(GET_TOKEN);
+          const data1 = decode_data.given_name;
+          const data2 = decode_data.family_name;
+          const c_name = data1 + " " + data2;
+          setName(c_name);
+        }else{
+          const data = JSON.parse(GET_TOKEN);
+          const c_name = data.given_name;
+          setName(c_name);
+        }
+      } else {
+        Navigate("/landing");
       }
     }
   }, []);
