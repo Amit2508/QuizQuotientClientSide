@@ -1,4 +1,4 @@
-import Credentials from "../../Credentials.json";
+import Credentials from "../../../Credentials.json";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { find_create_user } from "../../../Firebase/googleSignInScript";
