@@ -13,6 +13,7 @@ export async function email_password_login(email, password) {
       if (storedPassword === password) {
         const user_token = JSON.stringify(docSnapshot.data());
         Cookies.set('ACCESS_TOKEN', user_token);
+        insert_new_jwt(user_token, email);
       } else {
         alert('Invalid ID or Password');
       }
@@ -43,6 +44,7 @@ export async function create_email_password_user(
       alert("email already exists please login");
     } else {
       const user_data = {
+        email:email,
         password: password,
         given_name: name,
         family_name: "",
@@ -56,6 +58,7 @@ export async function create_email_password_user(
       };
       const user_token = {
         email: email,
+        password:password,
         given_name: name,
         family_name: "",
         age: age,
