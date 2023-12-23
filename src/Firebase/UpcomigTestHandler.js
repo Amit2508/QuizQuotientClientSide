@@ -16,8 +16,10 @@ export async function GetUpcomingTestHandler() {
     const UpcomingTestsHolder = [];
 
     TestCollectionSnapShot.forEach((doc) => {
+      const data = doc.data();
       UpcomingTestsHolder.push({
         tests: doc.id,
+        TestDetails: data.TestDetails,
       });
     });
 
@@ -27,4 +29,5 @@ export async function GetUpcomingTestHandler() {
     console.log("These are the error - ", error);
   }
 }
+
 
