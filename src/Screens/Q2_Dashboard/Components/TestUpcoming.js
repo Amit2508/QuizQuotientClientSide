@@ -9,7 +9,7 @@ const TestUpcoming = ({ getState }) => {
   const [text, setText] = useState("text-black");
   const [shadow, setShadow] = useState("shadow-sky-500");
   const [tests, setTests] = useState([]);
-
+  const [info, setInfo] = useState("");
   const [Modal, ShowModal] = useState(false);
   useEffect(() => {
     setState(getState);
@@ -39,11 +39,14 @@ const TestUpcoming = ({ getState }) => {
     getUpcomingTests();
   }, []);
 
-  const activateModal = () => {
+  const activateModal = (info) => {
     if (Modal === false) {
+      setInfo(info);
       ShowModal(true);
+      console.log(info);
     } else {
       ShowModal(false);
+      setInfo("");
     }
   };
   return (
@@ -63,7 +66,7 @@ const TestUpcoming = ({ getState }) => {
             >
               <div
                 className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
-                onClick={() => activateModal()}
+                onClick={() => activateModal(test.TestDetails)}
               ></div>
               <p className="font-bold text-white">No upcoming tests</p>
             </div>
@@ -71,21 +74,28 @@ const TestUpcoming = ({ getState }) => {
             tests.map((test, index) => (
               <div
                 key={index}
-                className={`${myList.at(
-                  1
-                )} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-red-500 hover:shadow-red-600 hover:cursor-pointer`}
+                className={`${myList.at({
+                  index,
+                })} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-red-500 hover:shadow-red-600 hover:cursor-pointer`}
               >
                 <div
                   className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
-                  onClick={() => activateModal()}
+                  onClick={() => activateModal(test.TestDetails)}
                 ></div>
                 <p className="font-bold text-white">{test.tests}</p>
+                <div></div>
               </div>
             ))
           )}
+          <div>
+            {Modal && (
+              <TestInfoModal
+                modalOpen={ShowModal}
+                TestDetails={info}
+              />
+            )}
+          </div>
         </div>
-
-        <div>{Modal && <TestInfoModal modalOpen={ShowModal} />}</div>
       </div>
     </>
   );
