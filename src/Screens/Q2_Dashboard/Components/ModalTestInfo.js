@@ -1,11 +1,48 @@
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { json, useNavigate } from "react-router-dom";
 
-const TestInfoModal = ({ modalOpen }) => {
+const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const Navigate = useNavigate();
-
+  const [name, setName] = useState("");
+  const [totalQuestions, setTotalQuestions] = useState("");
+  const [topic, setTopic] = useState("");
+  const [duration, setDuration] = useState("");
+  const [st, setSt] = useState("");
+  const [et, setEt] = useState("");
+  const [date, setDate] = useState("");
   const handleNavigation = () => {
     Navigate("/quiz");
   };
+  useEffect(() => {
+    console.log(TestDetails);
+    const r_data = JSON.parse(TestDetails);
+    if (typeof r_data === json) {
+      const data = r_data;
+      setName(data.test);
+      setTotalQuestions(data.questions);
+      setDuration(data.duration);
+      setTopic(data.name);
+      setSt(data.st);
+      setEt(data.ed);
+      setDate(data.date);
+    } else {
+      try {
+        // Ensure r_data is a string before parsing
+        const data = typeof r_data === "string" ? JSON.parse(r_data) : r_data;
+        setName(data.test);
+        setTotalQuestions(data.questions);
+        setDuration(data.duration);
+        setTopic(data.name);
+        setSt(data.st);
+        setEt(data.ed);
+        setDate(data.date);
+        console.log(data);
+      } catch (error) {
+        console.log("JSON Parse Error ", error);
+      }
+    }
+  }, []);
+
   return (
     <>
       {modalOpen && (
@@ -18,25 +55,25 @@ const TestInfoModal = ({ modalOpen }) => {
               X
             </button>
             <div className={`m-2 p-2`}>
-              <p className={`font-bold`}>Test-1</p>
+              <p className={`font-bold`}>{name}</p>
             </div>
             <div className={`m-2 p-2`}>
               <p className={``}>Read the instructions carefully</p>
             </div>
             <div className={`m-2 p-2`}>
               <div>
-                <p className={``}>Number of questions - 20</p>
-                <p className={``}>Total Time - 60 minutes</p>
+                <p className={``}>Number of questions - {totalQuestions}</p>
+                <p className={``}>Total Time - {duration} minutes</p>
                 <p className={``}>Type - Objective</p>
-                <p className={``}>Topics - X Y Z</p>
+                <p className={``}>Topics -{topic}</p>
               </div>
             </div>
             <div className={`m-2 p-2`}>
               <div className={`m-2 p-2`}>
+                <p className={`font-bold`}>Test Date & Time: {date} </p>
                 <p className={`font-bold`}>
-                  Test Date & Time - 14th January 2023{" "}
+                  {st} to {et}{" "}
                 </p>
-                <p className={`font-bold`}>2:30 pm to 3:30 pm </p>
               </div>
 
               <div
