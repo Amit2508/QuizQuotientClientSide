@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TestInfoModal from "./ModalTestInfo";
+import { GetUpcomingTestHandler } from "../../../Firebase/UpcomigTestHandler";
 
 const TestUpcoming = ({ getState }) => {
   let myList = ["bg-pink-600", "bg-red-500", "bg-pink-400", "bg-orange-500"];
@@ -7,7 +8,8 @@ const TestUpcoming = ({ getState }) => {
   const [bgColor, setbgColor] = useState("bg-white");
   const [text, setText] = useState("text-black");
   const [shadow, setShadow] = useState("shadow-sky-500");
-
+  const [tests, setTests] = useState([]);
+  const [info, setInfo] = useState("");
   const [Modal, ShowModal] = useState(false);
   useEffect(() => {
     setState(getState);
@@ -25,11 +27,25 @@ const TestUpcoming = ({ getState }) => {
     }
   }, [state]);
 
-  const activateModal = () => {
+  useEffect(() => {
+    const getUpcomingTests = async () => {
+      const tests = await GetUpcomingTestHandler();
+      if (tests === undefined) {
+        tests = ["No Upcoming Tests"];
+        setTests(tests);
+      }
+      setTests(tests);
+    };
+    getUpcomingTests();
+  }, []);
+
+  const activateModal = (info) => {
     if (Modal === false) {
+      setInfo(info);
       ShowModal(true);
     } else {
       ShowModal(false);
+      setInfo("");
     }
   };
   return (
@@ -41,15 +57,43 @@ const TestUpcoming = ({ getState }) => {
           <p className={`font-bold ${text}`}>Tests Upcoming</p>
         </div>
         <div className="grid grid-cols-1 gap-12 p-2 w-64">
-          <div
-            className={`${myList.at(
-              1
-            )} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-red-500 hover:shadow-red-600 hover:cursor-pointer`}
-          >
-            <div className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"></div>
-            <p className="font-bold text-white">No upcoming tests</p>
+          {tests.length === 0 ? (
+            <div
+              className={`${myList.at(
+                1
+              )} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-red-500 hover:shadow-red-600 hover:cursor-pointer`}
+            >
+              <div
+                className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
+                onClick={() => activateModal(test.TestDetails)}
+              ></div>
+              <p className="font-bold text-white">No upcoming tests</p>
+            </div>
+          ) : (
+            tests.map((test, index) => (
+              <div
+                key={index}
+                className={`${myList.at({
+                  index,
+                })} h-32 flex items-center justify-center shadow-lg rounded-xl relative shadow-red-500 hover:shadow-red-600 hover:cursor-pointer`}
+              >
+                <div
+                  className="absolute inset-0 bg-opacity-50 bg-gray-500 rounded-xl"
+                  onClick={() => activateModal(test.TestDetails)}
+                ></div>
+                <p className="font-bold text-white">{test.tests}</p>
+                <p className="text-white m-2 text-sm">{test.date.substring(0, 10)}</p>
+              </div>
+            ))
+          )}
+          <div>
+            {Modal && (
+              <TestInfoModal
+                modalOpen={ShowModal}
+                TestDetails={info}
+              />
+            )}
           </div>
-          <div>{Modal && <TestInfoModal modalOpen={ShowModal} />}</div>
         </div>
       </div>
     </>
