@@ -11,7 +11,7 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const [et, setEt] = useState("");
   const [date, setDate] = useState("");
   const handleNavigation = () => {
-    Navigate("/quiz");
+    Navigate("/quiz", {state: {name}});
   };
   useEffect(() => {
     const r_data = JSON.parse(TestDetails);
