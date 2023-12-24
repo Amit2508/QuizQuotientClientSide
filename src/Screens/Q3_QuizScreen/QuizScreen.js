@@ -3,7 +3,9 @@ import Navbar from "../Components/Navbar";
 import QuestionStatusHolder from "./Components/QuestionStatusHolder";
 import QuestionHolder from "./Components/QuestionHolder";
 import { Reterieve_question } from "../../Firebase/TestHandler";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { SaveAnswers } from "../../Firebase/TestHandler";
+
 const QuizScreen = () => {
   let stateVal = localStorage.getItem("web_state");
   if (stateVal === null) {
@@ -20,7 +22,7 @@ const QuizScreen = () => {
   const [OptionHandler, SetOptionHandler] = useState({});
 
   const location = useLocation();
-  const testName = location.state?.name || "No Name"; // Use optional chaining to avoid errors
+  const testName = location.state?.name || "No Name"; 
 
   const handleSelectBox = (boxNumber) => {
     setSelectedBox(boxNumber);
@@ -98,6 +100,30 @@ const QuizScreen = () => {
     startTimer(time);
   }, []);
 
+  const handleSubmission = () => {
+    const userConfirmed = window.confirm("Are you sure you want to submit?");
+    
+    if (userConfirmed) {
+      // User clicked "Yes"
+      alert("Submitting data...");
+      handleSubmit();
+      // Perform your submit logic here
+    } else {
+      // User clicked "No" or closed the dialog
+      alert("Submission canceled.");
+      // Handle the cancellation or perform other actions
+    }
+  };
+
+  const navigate = useNavigate();
+
+async function handleSubmit(){
+  const selectedOptions = JSON.stringify(OptionHandler);
+  await SaveAnswers(testName, selectedOptions);
+  navigate('/home');
+  }
+
+
   return (
     <>
       <div className={`border border-black ${background} h-screen`}>
@@ -128,7 +154,8 @@ const QuizScreen = () => {
           </div>
         </div>
         <div>
-          <button className="bg-red-600 text-white p-2 rounded-xl">
+          <button className="bg-red-600 text-white p-2 rounded-xl"
+          onClick={()=>handleSubmission()}>
             Finish Attempt
           </button>
         </div>
