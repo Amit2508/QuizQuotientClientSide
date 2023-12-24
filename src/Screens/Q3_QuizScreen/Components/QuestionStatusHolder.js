@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { GetQuestionsID } from "../Scripts/QuestionDetailsPuller";
-const QuestionStatusHolder = ({ state }) => {
+const QuestionStatusHolder = ({ state, total, onSelectBox }) => {
   const [text, setText] = useState("text-black");
   const [bg, setBg] = useState("bg-white");
-  const GetId = GetQuestionsID();
   useEffect(() => {
     if (state === 0) {
       setText("text-black");
@@ -15,13 +13,14 @@ const QuestionStatusHolder = ({ state }) => {
   }, [state]);
   const generateQuestionHolder = () => {
     const QuestionHolder = [];
-    for (let i = 1; i <= GetId.length; i++) {
+    for (let i = 0; i < total; i++) {
       QuestionHolder.push(
         <div
           id={i}
           className={`w-12 h-12 bg-yellow-200 rounded-lg cursor-pointer`}
+          onClick={() => onSelectBox(i + 1)}
         >
-          <p>{i}</p>
+          <p>{i + 1}</p>
         </div>
       );
     }
