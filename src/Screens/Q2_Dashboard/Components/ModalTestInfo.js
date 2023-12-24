@@ -14,7 +14,6 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
     Navigate("/quiz");
   };
   useEffect(() => {
-    console.log(TestDetails);
     const r_data = JSON.parse(TestDetails);
     if (typeof r_data === json) {
       const data = r_data;
@@ -36,9 +35,8 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
         setSt(data.st);
         setEt(data.ed);
         setDate(data.date);
-        console.log(data);
       } catch (error) {
-        console.log("JSON Parse Error ", error);
+        alert("Some error occured dont click this again!!!!")
       }
     }
   }, []);

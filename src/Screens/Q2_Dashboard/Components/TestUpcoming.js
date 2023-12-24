@@ -43,7 +43,6 @@ const TestUpcoming = ({ getState }) => {
     if (Modal === false) {
       setInfo(info);
       ShowModal(true);
-      console.log(info);
     } else {
       ShowModal(false);
       setInfo("");
