@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import QuestionStatusHolder from "./Components/QuestionStatusHolder";
 import QuestionHolder from "./Components/QuestionHolder";
-
+import { Reterieve_question } from "../../Firebase/TestHandler";
+import { useLocation } from "react-router-dom";
 const QuizScreen = () => {
   let stateVal = localStorage.getItem("web_state");
   if (stateVal === null) {
@@ -10,7 +11,27 @@ const QuizScreen = () => {
   }
   const [state, setState] = useState(parseInt(stateVal));
   const [background, setBackGround] = useState("bg-black");
-  const [text, setText] = useState("text-black");
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [time, setTime] = useState("");
+  const [total, setTotal] = useState(0);
+  const [selectBox, setSelectedBox] = useState(null);
+  const [Question, AddQuestion] = useState([]);
+  const [OptionHandler, SetOptionHandler] = useState({});
+
+  const location = useLocation();
+  const testName = location.state?.name || "No Name"; // Use optional chaining to avoid errors
+
+  const handleSelectBox = (boxNumber) => {
+    setSelectedBox(boxNumber);
+  };
+
+  const HandleOptionChange = (boxNumber, option) => {
+    SetOptionHandler((prevOption) => ({
+      ...prevOption,
+      [boxNumber]: option,
+    }));
+  };
 
   const updateState = (state) => {
     if (state === 0) {
@@ -24,13 +45,58 @@ const QuizScreen = () => {
   useEffect(() => {
     if (state === 0) {
       setBackGround("bg-white");
-      setText("text-black");
     }
     if (state === 1) {
       setBackGround("bg-sky-900");
-      setText("text-white");
     }
   }, [state]);
+
+  useEffect(() => {
+    const getQuestions = async () => {
+      const data = await Reterieve_question(testName);
+      const duration = data.duration;
+      setTime(duration);
+      const question = data.Question;
+      const QuestionData = [];
+      for (let i = 0; i < question.length; i++) {
+        QuestionData.push(JSON.parse(question[i]));
+      }
+      AddQuestion(QuestionData);
+      const totalQuestion = data.total;
+      setTotal(totalQuestion);
+    };
+    getQuestions();
+  }, []);
+
+  const startTimer = (initialMinutes) => {
+    setMinutes(initialMinutes);
+    setSeconds(0);
+  };
+
+  useEffect(() => {
+    let timer;
+    if (minutes > 0 || seconds > 0) {
+      timer = setInterval(() => {
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(timer);
+            alert("Time is up!");
+          } else {
+            setMinutes((prevMinutes) => prevMinutes - 1);
+            setSeconds(59);
+          }
+        } else {
+          setSeconds((prevSeconds) => prevSeconds - 1);
+        }
+      }, 1000);
+    }
+
+    return () => clearInterval(timer);
+  }, [minutes, seconds]);
+
+  useEffect(() => {
+    startTimer(time);
+  }, []);
 
   return (
     <>
@@ -38,13 +104,33 @@ const QuizScreen = () => {
         <div>
           <Navbar updateState={updateState} />
         </div>
+        <div className="text-2xl mb-4 text-white">
+          {" "}
+          Time left -{String(minutes).padStart(2, "0")}:
+          {String(seconds).padStart(2, "0")}
+        </div>
         <div className={`flex justify-evenly`}>
           <div>
-            <QuestionStatusHolder state={state} />
+            <QuestionStatusHolder
+              state={state}
+              total={total}
+              onSelectBox={handleSelectBox}
+            />
           </div>
           <div className={`w-full`}>
-            <QuestionHolder state={state} />
+            <QuestionHolder
+              state={state}
+              selected={selectBox}
+              QuestionDetails={Question[selectBox - 1]}
+              option={OptionHandler}
+              onOptionChange={HandleOptionChange}
+            />
           </div>
+        </div>
+        <div>
+          <button className="bg-red-600 text-white p-2 rounded-xl">
+            Finish Attempt
+          </button>
         </div>
       </div>
     </>
