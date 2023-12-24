@@ -33,7 +33,7 @@ export async function GetUpcomingTestHandler() {
     return latestTests;
   } catch (error) {
     alert("Please retry again");
-    console.log("These are the error - ", error);
+    console.error("These are the error - ", error);
   }
 
 
