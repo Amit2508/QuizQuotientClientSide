@@ -24,8 +24,9 @@ export async function Reterieve_question(document) {
       const extractQuestionInfo = JSON.parse(QuestionInfo);
       const data = documentData.TestDetails;
       const parse_data = JSON.parse(data);
-      const time = parse_data.duration;
-      const questions = parse_data.questions;
+      const json_data = JSON.parse(parse_data);
+      const time = json_data.duration;
+      const questions = json_data.questions;
       const send_data = {
         duration: time,
         Question: extractQuestionInfo,
