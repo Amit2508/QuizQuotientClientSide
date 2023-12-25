@@ -65,7 +65,8 @@ const QuizScreen = () => {
       }
       AddQuestion(QuestionData);
       const totalQuestion = data.total;
-      setTotal(totalQuestion);
+      console.log("These are the total Qutestions = ",data);
+      setTotal(QuestionData.length);
     };
     getQuestions();
   }, []);
