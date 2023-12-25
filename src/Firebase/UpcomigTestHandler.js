@@ -1,11 +1,8 @@
 import {
   collection,
   doc,
-  setDoc,
   getDoc,
   getDocs,
-  deleteDoc,
-  updateDoc,
 } from "firebase/firestore";
 import { db } from "./config";
 import Cookies from "js-cookie";
@@ -90,28 +87,8 @@ async function Get_Given_Test(doc_id) {
     const UserCollectionSnapShot = await getDoc(UserCollectionDocument);
 
     if (UserCollectionSnapShot.exists()) {
-      console.log(
-        "Current email - ",
-        email,
-        " Current set = ",
-        set,
-        " Document ID = ",
-        doc_id,
-        "IT Exists ?",
-        true
-      );
       return true;
     } else {
-      console.log(
-        "Current email - ",
-        email,
-        " Current set = ",
-        set,
-        " Document ID = ",
-        doc_id,
-        "IT Exists ?",
-        false
-      );
       return false;
     }
   } catch (error) {
