@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const MarkSection = ({ state }) => {
+const MarkSection = ({ state, marks }) => {
   const [textColor, setTextColor] = useState("text-yellow-600");
   const [backgroundColor, setBackgroundColor] = useState("bg-white");
   const [borderColor, setBorderColor] = useState("border-yellow-600");
@@ -23,7 +23,7 @@ const MarkSection = ({ state }) => {
             <p className={`${textColor} p-2`}>These are your marks - </p>
           </div>
           <div>
-            <p className={`font-bold ${textColor} text-4xl p-2`}>100/100</p>
+            <p className={`font-bold ${textColor} text-4xl p-2`}>{marks}</p>
           </div>
           <div>
             <button

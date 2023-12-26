@@ -18,18 +18,7 @@ const ResultTable = ({state}) => {
 
   const generateRandomList = () => {
     const Name = [];
-    for (let i = 0; i < 20; i++) {
-        const randomNumber = Math.floor(Math.random() * (100 - 20 + 1)) + 20;
-        Name.push(
-            <div key={i} className={`grid grid-cols-5 ${textcColor}`}>
-                <p>{i}</p>
-                <p>Name{i}</p>
-                <p>{randomNumber}</p>
-                <p>{i+1}</p>
-                <p>100</p>
-            </div>
-        )
-    }
+    Name.push(<div className={`${textcColor} font-bold`}>Rank not declared</div>)
     return Name;
   };
   return (
