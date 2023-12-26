@@ -33,11 +33,11 @@ const SubNavbar = ({ getState }) => {
     <>
       <div className="relative w-full">
         <div
-          className={`${bg} text-left text-2xl text-black font-base flex items-center justify-center z-10 sm:h-full`}
+          className={`${bg} text-left text-2xl text-black font-base flex items-center justify-center sm:h-full`}
         >
           <img src={BackGround1} alt={`Background`} className="h-full" />
         </div>
-        <div className={`absolute w-full h-full inset-0 z-20`}>
+        <div className={`absolute w-full h-full inset-0 `}>
           <div
             className={`sm:flex sm:flex-row flex justify-evenly items-center p-4`}
           >

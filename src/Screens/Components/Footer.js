@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
             <div className="flex items-center gap-x-2 mt-1">
               <img src={telephone} alt={`telephone`} className="w-8 h-8" />
-              <p className="text-white">9017090254</p>
+              <p className="text-white">9017090254, 7658052089</p>
             </div>
           </div>
         </div>
