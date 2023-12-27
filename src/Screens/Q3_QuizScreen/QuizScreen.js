@@ -18,15 +18,17 @@ const QuizScreen = () => {
   const [total, setTotal] = useState(0);
   const [selectBox, setSelectedBox] = useState(null);
   const [Question, AddQuestion] = useState([]);
-  const [OptionHandler, SetOptionHandler] = useState(JSON.parse(localStorage.getItem('Answer')));
+  const [OptionHandler, SetOptionHandler] = useState(
+    JSON.parse(localStorage.getItem("Answer"))
+  );
 
   const location = useLocation();
   const testName = location.state?.name || "No Name";
 
   const handleSelectBox = (boxNumber) => {
-    if(boxNumber<=total && boxNumber >0){
+    if (boxNumber <= total && boxNumber > 0) {
       setSelectedBox(boxNumber);
-      localStorage.setItem('Answer', JSON.stringify(OptionHandler))
+      localStorage.setItem("Answer", JSON.stringify(OptionHandler));
     }
   };
 
@@ -96,13 +98,18 @@ const QuizScreen = () => {
   }, [minutes, seconds]);
 
   useEffect(() => {
-    let time = localStorage.getItem("duration");
-    let c_time = parseInt(time) + 1;
-    if (c_time <= 0) {
-      alert("Time is up ");
-    } else {
-      startTimer(c_time);
+    const handleTimer = async()=>{
+      let time = localStorage.getItem("duration");
+      let c_time = parseInt(time) + 1;
+      if (c_time <= 0) {
+        alert("Time is up ");
+        await handleSubmit();
+      } else {
+        startTimer(c_time);
+      }
     }
+    handleTimer();
+   
   }, []);
 
   useEffect(() => {
@@ -143,14 +150,11 @@ const QuizScreen = () => {
         <div>
           <Navbar updateState={updateState} />
         </div>
-        <div className="text-2xl mb-4 text-white">
+        <div className="text-2xl mb-4 text-red-600">
           {" "}
           Time left : {String(minutes).padStart(2, "0")}:
           {String(seconds).padStart(2, "0")}
-          <p>
-            Do not reload the screen at any cost. it will cost you 1 or 2
-            minutes
-          </p>
+          <p className={`text-black`}>Do not reload the screen, it will cost you 1 or 2 minutes</p>
         </div>
         <div className={`flex justify-evenly`}>
           <div>
