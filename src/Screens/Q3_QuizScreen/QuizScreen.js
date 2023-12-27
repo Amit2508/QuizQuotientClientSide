@@ -15,17 +15,21 @@ const QuizScreen = () => {
   const [background, setBackGround] = useState("bg-black");
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
-  const [time, setTime] = useState("");
   const [total, setTotal] = useState(0);
   const [selectBox, setSelectedBox] = useState(null);
   const [Question, AddQuestion] = useState([]);
-  const [OptionHandler, SetOptionHandler] = useState({});
+  const [OptionHandler, SetOptionHandler] = useState(
+    JSON.parse(localStorage.getItem("Answer"))
+  );
 
   const location = useLocation();
-  const testName = location.state?.name || "No Name"; 
+  const testName = location.state?.name || "No Name";
 
   const handleSelectBox = (boxNumber) => {
-    setSelectedBox(boxNumber);
+    if (boxNumber <= total && boxNumber > 0) {
+      setSelectedBox(boxNumber);
+      localStorage.setItem("Answer", JSON.stringify(OptionHandler));
+    }
   };
 
   const HandleOptionChange = (boxNumber, option) => {
@@ -56,16 +60,12 @@ const QuizScreen = () => {
   useEffect(() => {
     const getQuestions = async () => {
       const data = await Reterieve_question(testName);
-      const duration = data.duration;
-      setTime(duration);
       const question = data.Question;
       const QuestionData = [];
       for (let i = 0; i < question.length; i++) {
         QuestionData.push(JSON.parse(question[i]));
       }
       AddQuestion(QuestionData);
-      const totalQuestion = data.total;
-      console.log("These are the total Qutestions = ",data);
       setTotal(QuestionData.length);
     };
     getQuestions();
@@ -98,12 +98,32 @@ const QuizScreen = () => {
   }, [minutes, seconds]);
 
   useEffect(() => {
-    startTimer(time);
+    const handleTimer = async()=>{
+      let time = localStorage.getItem("duration");
+      let c_time = parseInt(time) + 1;
+      if (c_time <= 0) {
+        alert("Time is up ");
+        await handleSubmit();
+      } else {
+        startTimer(c_time);
+      }
+    }
+    handleTimer();
+   
+  }, []);
+
+  useEffect(() => {
+    const handleLocalStorage = () => {
+      let time = localStorage.getItem("duration");
+      let c_time = parseInt(time) - 1;
+      localStorage.setItem("duration", c_time);
+    };
+    handleLocalStorage();
   }, []);
 
   const handleSubmission = () => {
     const userConfirmed = window.confirm("Are you sure you want to submit?");
-    
+
     if (userConfirmed) {
       // User clicked "Yes"
       alert("Submitting data...");
@@ -118,12 +138,11 @@ const QuizScreen = () => {
 
   const navigate = useNavigate();
 
-async function handleSubmit(){
-  const selectedOptions = JSON.stringify(OptionHandler);
-  await SaveAnswers(testName, selectedOptions);
-  navigate('/home');
+  async function handleSubmit() {
+    const selectedOptions = JSON.stringify(OptionHandler);
+    await SaveAnswers(testName, selectedOptions);
+    navigate("/home");
   }
-
 
   return (
     <>
@@ -131,10 +150,11 @@ async function handleSubmit(){
         <div>
           <Navbar updateState={updateState} />
         </div>
-        <div className="text-2xl mb-4 text-white">
+        <div className="text-2xl mb-4 text-red-600">
           {" "}
-          Time left -{String(minutes).padStart(2, "0")}:
+          Time left : {String(minutes).padStart(2, "0")}:
           {String(seconds).padStart(2, "0")}
+          <p className={`text-black`}>Do not reload the screen, it will cost you 1 or 2 minutes</p>
         </div>
         <div className={`flex justify-evenly`}>
           <div>
@@ -151,12 +171,15 @@ async function handleSubmit(){
               QuestionDetails={Question[selectBox - 1]}
               option={OptionHandler}
               onOptionChange={HandleOptionChange}
+              onSelectBox={handleSelectBox}
             />
           </div>
         </div>
         <div>
-          <button className="bg-red-600 text-white p-2 rounded-xl"
-          onClick={()=>handleSubmission()}>
+          <button
+            className="bg-red-600 text-white p-2 rounded-xl"
+            onClick={() => handleSubmission()}
+          >
             Finish Attempt
           </button>
         </div>

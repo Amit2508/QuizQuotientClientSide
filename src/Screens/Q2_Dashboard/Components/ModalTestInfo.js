@@ -11,6 +11,14 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const [et, setEt] = useState("");
   const [date, setDate] = useState("");
   const handleNavigation = () => {
+    const questions = parseInt(totalQuestions);
+    let arr = {};
+    for (let i=0; i<questions; i++){
+      arr[i]=5;
+    }
+    const data = JSON.stringify(arr);
+    localStorage.setItem('Answer', data);
+    localStorage.setItem('duration',duration);
     Navigate("/quiz", {state: {name}});
   };
   useEffect(() => {
