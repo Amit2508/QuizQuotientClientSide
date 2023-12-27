@@ -98,8 +98,19 @@ const QuizScreen = () => {
   }, [minutes, seconds]);
 
   useEffect(() => {
-    startTimer(time);
+    let time = localStorage.getItem('duration');
+      let c_time = parseInt(time) + 1;
+    startTimer(c_time);
   }, []);
+
+  useEffect(()=>{
+    const handleLocalStorage = ()=>{
+      let time = localStorage.getItem('duration');
+      let c_time = parseInt(time) - 1;
+      localStorage.setItem('duration',c_time);
+    }
+    handleLocalStorage();
+  },[])
 
   const handleSubmission = () => {
     const userConfirmed = window.confirm("Are you sure you want to submit?");
@@ -133,8 +144,9 @@ async function handleSubmit(){
         </div>
         <div className="text-2xl mb-4 text-white">
           {" "}
-          Time left -{String(minutes).padStart(2, "0")}:
+          Time left : {String(minutes).padStart(2, "0")}:
           {String(seconds).padStart(2, "0")}
+          <p>Do not reload the screen at any cost. it will cost you 1 or 2 minutes</p>
         </div>
         <div className={`flex justify-evenly`}>
           <div>
