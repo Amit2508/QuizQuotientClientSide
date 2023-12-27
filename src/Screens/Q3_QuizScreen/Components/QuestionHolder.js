@@ -6,6 +6,7 @@ const QuestionHolder = ({
   QuestionDetails,
   option,
   onOptionChange,
+  onSelectBox,
 }) => {
   // State for text color
   const [text, setText] = useState("text-white");
@@ -38,7 +39,7 @@ const QuestionHolder = ({
 
   // Function to clear selected option
   const clearSelection = () => {
-    handleOptionChange(0);
+    handleOptionChange(5);
   };
 
   const handleReviewButton = () => {
@@ -77,7 +78,7 @@ const QuestionHolder = ({
                   Question-{selected}
                 </p>
               </div>
-              <div className={`${text}`}>{Question}</div>
+              <div className={`${text} font-bold sm:text-xl text-lg`}>{Question}</div>
               <div>
                 {/* Question details with dynamic text color */}
                 <p className={`${text}`}>Select the correct answer:</p>
@@ -112,16 +113,18 @@ const QuestionHolder = ({
 
               <p className={`mt-2 ${text}`}>
                 Selected Option:{" "}
-                {optionHandler}
+                {optionHandler === 5?" ":optionHandler}
               </p>
               <div>
                 <button
                   className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
+                  onClick={()=>onSelectBox(selected-1)}
                 >
                   Previous
                 </button>
                 <button
                   className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
+                  onClick={()=>onSelectBox(selected+1)}
                 >
                   Save&Next
                 </button>
