@@ -11,6 +11,7 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const [et, setEt] = useState("");
   const [date, setDate] = useState("");
   const handleNavigation = () => {
+    localStorage.setItem('duration',duration);
     Navigate("/quiz", {state: {name}});
   };
   useEffect(() => {
