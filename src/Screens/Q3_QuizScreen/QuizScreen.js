@@ -4,7 +4,7 @@ import QuestionStatusHolder from "./Components/QuestionStatusHolder";
 import QuestionHolder from "./Components/QuestionHolder";
 import { Reterieve_question } from "../../Firebase/TestHandler";
 import { useLocation, useNavigate } from "react-router-dom";
-import { SaveAnswers } from "../../Firebase/TestHandler";
+import { UpdateAnswer } from "../../Firebase/TestHandler";
 
 const QuizScreen = () => {
   let stateVal = localStorage.getItem("web_state");
@@ -139,7 +139,7 @@ const QuizScreen = () => {
 
   async function handleSubmit() {
     const selectedOptions = JSON.stringify(OptionHandler);
-    await SaveAnswers(testName, selectedOptions);
+    await UpdateAnswer(testName, selectedOptions);
     navigate("/home");
   }
 
