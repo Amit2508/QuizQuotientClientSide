@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { json, useNavigate } from "react-router-dom";
+import { SaveAnswers } from "../../../Firebase/TestHandler";
 
 const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const Navigate = useNavigate();
@@ -10,7 +11,7 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const [st, setSt] = useState("");
   const [et, setEt] = useState("");
   const [date, setDate] = useState("");
-  const handleNavigation = () => {
+  const handleNavigation = async () => {
     const check = check_date_and_time(st, et, date);
     if (check === false) {
       alert("Test not started yet");
@@ -23,6 +24,7 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
       const data = JSON.stringify(arr);
       localStorage.setItem("Answer", data);
       localStorage.setItem("duration", duration);
+      await SaveAnswers(name, data);
       Navigate("/quiz", { state: { name } });
     }
   };
@@ -102,8 +104,19 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
 export default TestInfoModal;
 
 function check_date_and_time(st, et, date) {
-  const startTime = new Date(`1970-01-01T${st}`);
-  const endTime = new Date(`1970-01-01T${et}`);
-  const inputDateTime = new Date(`${date}T00:00:00`);
-  return inputDateTime >= startTime && inputDateTime <= endTime;
+  // Get current date and time
+  var currentDate = new Date();
+
+  // Extract time components from start and end times
+  var startTime = new Date(date + 'T' + st);
+  var endTime = new Date(date + 'T' + et);
+
+  // Compare current time with start and end times
+  if (currentDate >= startTime && currentDate <= endTime) {
+      return true;
+  } else {
+      return false;
+  }
 }
+
+
