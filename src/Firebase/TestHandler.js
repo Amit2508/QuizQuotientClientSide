@@ -44,6 +44,7 @@ export async function Reterieve_question(document) {
 
 export async function SaveAnswers(testid, answerList) {
   const token = Cookies.get("ACCESS_TOKEN");
+  let CurrentDate = new Date();
   if (token.substring(0, 1) !== "{") {
     const decoded = jwtDecode(token);
     const email = decoded.email;
@@ -76,7 +77,7 @@ export async function SaveAnswers(testid, answerList) {
 
         await setDoc(AnswerDocumentRef, data);
         await setDoc(PaperDocumentRef, data);
-        alert("Test Paper Started");
+        alert("All the best for your Quiz!!!");
       }
     } catch (error) {
       alert("Internet connection weak, please try again after some time");
@@ -106,11 +107,14 @@ export async function SaveAnswers(testid, answerList) {
           marks: "Not yet announced",
           answers: answerList,
           rank: "Not yet announced",
+          startTime: CurrentDate,
+          endTime: 0,
+          status: "Giving",
         };
 
         await setDoc(AnswerDocumentRef, data);
         await setDoc(PaperDocumentRef, data);
-        alert("Test Paper Submitted Successfully!!!");
+        alert("All the best for your Quiz!!!");
       }
     } catch (error) {
       alert("Internet connection weak, please try again after some time");
