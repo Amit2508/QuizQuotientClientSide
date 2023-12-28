@@ -13,13 +13,13 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const handleNavigation = () => {
     const questions = parseInt(totalQuestions);
     let arr = {};
-    for (let i=0; i<questions; i++){
-      arr[i]=5;
+    for (let i = 0; i < questions; i++) {
+      arr[i] = 5;
     }
     const data = JSON.stringify(arr);
-    localStorage.setItem('Answer', data);
-    localStorage.setItem('duration',duration);
-    Navigate("/quiz", {state: {name}});
+    localStorage.setItem("Answer", data);
+    localStorage.setItem("duration", duration);
+    Navigate("/quiz", { state: { name } });
   };
   useEffect(() => {
     const r_data = JSON.parse(TestDetails);
@@ -34,7 +34,6 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
       setDate(data.date);
     } else {
       try {
-        // Ensure r_data is a string before parsing
         const data = typeof r_data === "string" ? JSON.parse(r_data) : r_data;
         setName(data.test);
         setTotalQuestions(data.questions);
@@ -44,7 +43,7 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
         setEt(data.ed);
         setDate(data.date);
       } catch (error) {
-        alert("Some error occured dont click this again!!!!")
+        alert("Some error occured dont click this again!!!!");
       }
     }
   }, []);
