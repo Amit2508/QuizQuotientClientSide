@@ -32,10 +32,12 @@ const QuestionStatusHolder = ({ state, total, onSelectBox }) => {
         <div>
           <p className={`${text} sm:m-2 m-1`}>Question Panel</p>
         </div>
-        <div
-          className={`grid sm:grid-cols-3 grid-cols-1 sm:gap-2 gap-1 sm:p-2 p-1 overflow-auto h-64 shadow-md shadow-blue-200 rounded-xl `}
-        >
-          {generateQuestionHolder()}
+        <div className="flex items-center justify-center">
+          <div
+            className={`grid sm:grid-cols-3 grid-cols-1 gap-1 sm:p-2 p-1 overflow-auto sm:h-auto h-32 shadow-md shadow-blue-200 rounded-xl `}
+          >
+            {generateQuestionHolder()}
+          </div>
         </div>
         <div className={`sm:mt-6 mt-2 sm:p-2 p-1`}>
           <div
