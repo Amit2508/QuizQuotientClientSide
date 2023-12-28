@@ -16,28 +16,14 @@ const MarkSection = ({ state, marks }) => {
   }, [state]);
   return (
     <>
-      <div className={`p-4`}>
+      <div className={`p-2`}>
         <div className={`${backgroundColor} rounded-lg shadow-xl shadow-blue-400`}>
           <p className={`${textColor} p-2`}>Thanks for the test attempt</p>
           <div>
             <p className={`${textColor} p-2`}>These are your marks - </p>
           </div>
           <div>
-            <p className={`font-bold ${textColor} text-4xl p-2`}>{marks}</p>
-          </div>
-          <div>
-            <button
-              className={`border ${borderColor} ${textColor} p-2 m-2 rounded-xl cursor-pointer`}
-            >
-              Review Your Answers
-            </button>
-          </div>
-          <div>
-            <button
-              className={`border ${borderColor} ${textColor}  p-2 m-2 rounded-xl cursor-pointer`}
-            >
-              Blame
-            </button>
+            <p className={`font-bold ${textColor} text-6xl p-7`}>{marks}</p>
           </div>
         </div>
       </div>

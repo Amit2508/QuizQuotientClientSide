@@ -16,7 +16,9 @@ const QuestionHolder = ({
   // State for selected option
   const [marked, setMarked] = useState(false);
   const [action, setAction] = useState("Mark");
-  const [Question, setQuestion] = useState("Select Question from the side panel to start. All the best !!!!");
+  const [Question, setQuestion] = useState(
+    "Select Question from the side panel to start. All the best !!!!"
+  );
   const [Option, setOption] = useState([]);
   const optionHandler = option[selected - 1] || "";
   // useEffect to update styles based on the state
@@ -94,15 +96,15 @@ const QuestionHolder = ({
               <div>
                 <button
                   className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
-                  onClick={() => onSelectBox(selected - 1)}
-                >
-                  Previous
-                </button>
-                <button
-                  className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
                   onClick={() => onSelectBox(selected + 1)}
                 >
                   Save&Next
+                </button>
+                <button
+                  className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
+                  onClick={() => onSelectBox(selected - 1)}
+                >
+                  Previous
                 </button>
               </div>
               <p className={`mt-2 ${text}`}>
@@ -114,11 +116,11 @@ const QuestionHolder = ({
           )}
         </div>
         <button
-                className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
-                onClick={clearSelection}
-              >
-                Clear Selection
-              </button>
+          className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
+          onClick={clearSelection}
+        >
+          Clear Selection
+        </button>
       </div>
     </>
   );
