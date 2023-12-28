@@ -4,12 +4,14 @@ import MarkSection from "./Components/MarksSection";
 import ResultTable from "./Components/ResultTable";
 import { Check_Result_test } from "../../Firebase/UpcomigTestHandler";
 import { useLocation } from "react-router-dom";
+import { Get_Rank_List } from "../../Firebase/UpcomigTestHandler";
 const QuizResult = () => {
   let stateVal = localStorage.getItem("web_state");
   stateVal === null ? (stateVal = 0) : (stateVal = stateVal);
   const [state, setState] = useState(parseInt(stateVal));
   const [background, setBackGround] = useState("bg-white");
   const [marks, setMarks] = useState([]);
+  const [rank, setRank] = useState([]);
 
   const updateState = (state) => {
     if (state === 0) {
@@ -24,8 +26,11 @@ const QuizResult = () => {
   useEffect(()=>{
     const get_marks_rank = async() =>{
       const data = await Check_Result_test(test_id);
+      const rank = await Get_Rank_List(test_id);
+      const format = JSON.parse(rank[0]);
       const mark = data[0];
       setMarks(mark);
+      setRank(format);
     }
     get_marks_rank();
   },[])
@@ -44,7 +49,7 @@ const QuizResult = () => {
             <MarkSection state={state} marks={marks}/>
           </div>
           <div className={`w-full`}>
-            <ResultTable state={state}/>
+            <ResultTable state={state} rank={rank}/>
           </div>
         </div>
       </div>
