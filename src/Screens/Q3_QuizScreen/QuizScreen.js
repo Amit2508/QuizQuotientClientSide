@@ -98,7 +98,7 @@ const QuizScreen = () => {
   }, [minutes, seconds]);
 
   useEffect(() => {
-    const handleTimer = async()=>{
+    const handleTimer = async () => {
       let time = localStorage.getItem("duration");
       let c_time = parseInt(time) + 1;
       if (c_time <= 0) {
@@ -107,9 +107,8 @@ const QuizScreen = () => {
       } else {
         startTimer(c_time);
       }
-    }
+    };
     handleTimer();
-   
   }, []);
 
   useEffect(() => {
@@ -154,7 +153,9 @@ const QuizScreen = () => {
           {" "}
           Time left : {String(minutes).padStart(2, "0")}:
           {String(seconds).padStart(2, "0")}
-          <p className={`text-black`}>Do not reload the screen, it will cost you 1 or 2 minutes</p>
+          <p className={`text-black`}>
+            Do not reload the screen, it will cost you 1 or 2 minutes
+          </p>
         </div>
         <div className={`flex justify-evenly`}>
           <div>

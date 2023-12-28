@@ -8,17 +8,16 @@ import { useState } from "react";
 const Footer = () => {
   const [OpenModal, CloseModal] = useState(false);
 
-  const handleModal = () =>{
+  const handleModal = () => {
     CloseModal(true);
-  }
+  };
 
   return (
     <>
       <div className="sm:grid sm:grid-cols-3 sm:gap-12 p-8 bg-black grid grid-cols-1 items-center">
-        <div className="cursor-pointer" onClick={handleModal}>
-          <p className="font-bold text-white">About us</p>
-          <p className="text-white text-sm">
-           
+        <div className="cursor-pointe" onClick={handleModal}>
+          <p className="font-bold text-white p-2 bg-red-500 inline-block rounded-xl cursor-pointer">
+            About us
           </p>
         </div>
         <div className="flex flex-col p-2 justify-center items-center">
@@ -38,7 +37,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col p-2 justify-center items-center">
           <p className="font-bold text-white">Socials</p>
-          <div className="flex flex-col sm:flex-row">
+          <div className="flex flex-row">
             <div className="flex items-center gap-x-2 mt-2">
               <img src={linkedin} alt={`linkedin`} className="w-8 h-8" />
               <p className="text-white"></p>
@@ -48,14 +47,12 @@ const Footer = () => {
               <p className="text-white"></p>
             </div>
             <div className="flex items-center gap-x-2 mt-1">
-              <div className="bg-red-600 mt-1">
+              <div className="bg-red-700 mt-1">
                 <img src={twitter} alt={`twitter`} className="w-8 h-8" />
               </div>
               <p className="text-white"></p>
             </div>
-            <div>
-              {OpenModal && <InfoModal modalOpen={CloseModal}/>}
-            </div>
+            <div>{OpenModal && <InfoModal modalOpen={CloseModal} />}</div>
           </div>
         </div>
       </div>
