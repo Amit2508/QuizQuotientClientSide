@@ -11,15 +11,20 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   const [et, setEt] = useState("");
   const [date, setDate] = useState("");
   const handleNavigation = () => {
-    const questions = parseInt(totalQuestions);
-    let arr = {};
-    for (let i = 0; i < questions; i++) {
-      arr[i] = 5;
+    const check = check_date_and_time(st, et, date);
+    if (check === false) {
+      alert("Test not started yet");
+    } else {
+      const questions = parseInt(totalQuestions);
+      let arr = {};
+      for (let i = 0; i < questions; i++) {
+        arr[i] = 5;
+      }
+      const data = JSON.stringify(arr);
+      localStorage.setItem("Answer", data);
+      localStorage.setItem("duration", duration);
+      Navigate("/quiz", { state: { name } });
     }
-    const data = JSON.stringify(arr);
-    localStorage.setItem("Answer", data);
-    localStorage.setItem("duration", duration);
-    Navigate("/quiz", { state: { name } });
   };
   useEffect(() => {
     const r_data = JSON.parse(TestDetails);
@@ -95,3 +100,10 @@ const TestInfoModal = ({ modalOpen, TestDetails }) => {
   );
 };
 export default TestInfoModal;
+
+function check_date_and_time(st, et, date) {
+  const startTime = new Date(`1970-01-01T${st}`);
+  const endTime = new Date(`1970-01-01T${et}`);
+  const inputDateTime = new Date(`${date}T00:00:00`);
+  return inputDateTime >= startTime && inputDateTime <= endTime;
+}
