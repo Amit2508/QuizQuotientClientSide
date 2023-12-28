@@ -79,9 +79,7 @@ const TestUpcoming = ({ getState }) => {
                   onClick={() => activateModal(test.TestDetails)}
                 ></div>
                 <p className="font-bold text-white">{test.tests}</p>
-                <p className="text-white m-2 text-sm">
-                  {test.date.substring(0, 10)}
-                </p>
+                <p className="text-white m-2 text-sm">{test.date}</p>
               </div>
             ))
           )}
