@@ -119,3 +119,19 @@ export async function Check_Result_test(test_id) {
     alert("Error Getting Some info");
   }
 }
+
+export async function Get_Rank_List(test_id) {
+  const RankListRef = collection(db, "Tests");
+  const RankDoc = doc(RankListRef, test_id);
+  try {
+    const SnapShot = await getDoc(RankDoc);
+    const store_data = [];
+    if (SnapShot.exists()) {
+      const data = SnapShot.data();
+      store_data.push(data.rank);
+    }
+    return store_data;
+  } catch (error) {
+    console.error(error);
+  }
+}
