@@ -42,15 +42,6 @@ const QuestionHolder = ({
     handleOptionChange(5);
   };
 
-  const handleReviewButton = () => {
-    if (marked === true) {
-      setAction("Mark");
-      setMarked(false);
-    } else {
-      setMarked(true);
-      setAction("Unmark");
-    }
-  };
   useEffect(() => {
     if (selected !== null && selected !== Object) {
       setQuestion(QuestionDetails.valQuestion);
@@ -100,24 +91,6 @@ const QuestionHolder = ({
                   </label>
                 ))}
               </div>
-              {/* Clear button to reset selected option */}
-              <button
-                className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
-                onClick={clearSelection}
-              >
-                Clear Selection
-              </button>
-              <button
-                className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
-                onClick={handleReviewButton}
-              >
-                {action}
-              </button>
-              {/* Display selected option */}
-
-              <p className={`mt-2 ${text}`}>
-                Selected Option: {optionHandler === 5 ? " " : optionHandler}
-              </p>
               <div>
                 <button
                   className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
@@ -132,11 +105,20 @@ const QuestionHolder = ({
                   Save&Next
                 </button>
               </div>
+              <p className={`mt-2 ${text}`}>
+                Selected Option: {optionHandler === 5 ? " " : optionHandler}
+              </p>
             </div>
           ) : (
             <div className={`${text}`}>No Question Selected</div>
           )}
         </div>
+        <button
+                className={`mt-4 py-2 px-4 m-2 ${text} ${background} border border-green-200 rounded`}
+                onClick={clearSelection}
+              >
+                Clear Selection
+              </button>
       </div>
     </>
   );
