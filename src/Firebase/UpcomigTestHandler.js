@@ -24,11 +24,10 @@ export async function GetUpcomingTestHandler() {
         parseInt(endTimeArray[2])
       );
       if (currentDate <= testEndTime) {
-        console.log(currentDate, testEndTime);
         UpcomingTestsHolder.push({
           tests: doc.id,
           TestDetails: data.TestDetails,
-          date: formatDate(data.Date),
+          date: formatData.date,
         });
       }
     });
