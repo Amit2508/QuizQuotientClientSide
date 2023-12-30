@@ -41,7 +41,7 @@ const Navigate = useNavigate();
 
   return (
     <>
-      <div className="text-blue-500 text-xl font-bold">
+      <div className="text-blue-500 text-xl font-bold h-screen bg-black">
         Please Scan and pay the required amount
         <div className="flex flex-col justify-center items-center mt-2">
           <div className="mt-2">
