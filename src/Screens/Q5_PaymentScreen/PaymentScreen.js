@@ -26,6 +26,7 @@ const Navigate = useNavigate();
     if (number.length !== 10) {
       alert("Invalid Number");
     } else {
+      alert('Sending payment approval request....');
       await SendConfirmationRequest(
         name,
         GetNameType().user,
@@ -35,7 +36,6 @@ const Navigate = useNavigate();
         amount
       );
     }
-    alert('Paymener Approval Request Sent');
     Navigate('/home');
   };
 

@@ -37,21 +37,33 @@ const Footer = () => {
         </div>
         <div className="flex flex-col p-2 justify-center items-center">
           <p className="font-bold text-white">Socials</p>
-          <div className="flex flex-row">
+          <div className="flex flex-col">
             <div className="flex items-center gap-x-2 mt-2">
               <img src={linkedin} alt={`linkedin`} className="w-8 h-8" />
-              <p className="text-white"></p>
+              <p className="text-white">
+                <a
+                  href="https://whatsapp.com/channel/0029VaIynPy5kg7DFDP2oO1Z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp
+                </a>
+              </p>
             </div>
+
             <div className="flex items-center gap-x-2 mt-1">
               <img src={facebook} alt={`facebook`} className="w-8 h-8" />
-              <p className="text-white"></p>
+              <p className="text-white">
+                <a
+                  href="https://t.me/quizquotient"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Telegram
+                </a>
+              </p>
             </div>
-            <div className="flex items-center gap-x-2 mt-1">
-              <div className="bg-red-700 mt-1">
-                <img src={twitter} alt={`twitter`} className="w-8 h-8" />
-              </div>
-              <p className="text-white"></p>
-            </div>
+
             <div>{OpenModal && <InfoModal modalOpen={CloseModal} />}</div>
           </div>
         </div>

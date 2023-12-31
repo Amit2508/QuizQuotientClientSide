@@ -26,8 +26,7 @@ export async function SendConfirmationRequest(
     };
 
     await setDoc(emailDocRef, data);
-
-    console.log("Confirmation request sent successfully!");
+    alert("Request Sent Successfully!!!!")
   } catch (error) {
     alert("Internet Low , Please Try again");
     console.error("Error sending confirmation request:", error.message);
