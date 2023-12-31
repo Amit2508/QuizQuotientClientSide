@@ -20,16 +20,25 @@ const Navbar = ({ updateState, screen }) => {
   const [backGroundColor, setBackGroundColor] = useState("bg-white");
   const [text, setText] = useState("text-black");
   const [items, setItems] = useState([]);
-  const [imageURL, setImageURL] = useState('');
+  const [imageURL, setImageURL] = useState("");
 
-  const token = Cookies.get('ACCESS_TOKEN');
-  useEffect(()=>{
-    if(token!==undefined && token.length>10 && token.substring(0,1)!=='{'){
-      const decode = jwtDecode(token);
-      const image_url = decode.picture;
-      setImageURL(image_url);
+  const token = Cookies.get("ACCESS_TOKEN");
+  useEffect(() => {
+    try {
+      if (
+        token !== undefined &&
+        token.length > 10 &&
+        token !== null &&
+        token.substring(0, 1) !== "{"
+      ) {
+        const decode = jwtDecode(token);
+        const image_url = decode.picture;
+        setImageURL(image_url);
+      }
+    } catch (error) {
+      navigate('/landing');
     }
-  },[])
+  }, []);
 
   const handleLightClickListener = () => {
     const newDarknessState = updateState(darknessState === 0 ? 1 : 0);
@@ -70,7 +79,7 @@ const Navbar = ({ updateState, screen }) => {
       const LandingScreen = [""];
       setItems(LandingScreen);
     } else if (screen === "Dashboard") {
-      const Dashboard = ["Home", "Settings"];
+      const Dashboard = ["Settings", "Logout"];
       setItems(Dashboard);
     }
   }, [screen]);
@@ -81,14 +90,14 @@ const Navbar = ({ updateState, screen }) => {
   };
 
   const Navigate = useNavigate();
-  const handleLogout = () =>{
-    const data = Cookies.get('ACCESS_TOKEN');
-    if(data!=null && data.length>10){
-      insert_old_jwt(data)
-      Cookies.remove('ACCESS_TOKEN');
-      Navigate('/landing');
+  const handleLogout = async () => {
+    const data = Cookies.get("ACCESS_TOKEN");
+    if (data != null && data.length > 10) {
+      await insert_old_jwt(data);
+      Cookies.remove("ACCESS_TOKEN");
+      Navigate("/landing");
     }
-  }
+  };
 
   return (
     <>
@@ -103,14 +112,22 @@ const Navbar = ({ updateState, screen }) => {
             <p
               key={item}
               className={`${text} font-bold cursor-pointer`}
-              onClick={() => HandleNavigation(item)}
+              onClick={() => {
+                if (item === "Logout") {
+                  handleLogout();
+                } else {
+                  HandleNavigation(item);
+                }
+              }}
             >
               {item}
             </p>
           ))}
-          <img src={imageURL.length===0? userPhoto:imageURL} alt={``} 
-          className="w-8 h-8 rounded-2xl cursor-pointer"
-          onClick={()=>handleLogout()}
+
+          <img
+            src={imageURL.length === 0 ? userPhoto : imageURL}
+            alt={``}
+            className="w-8 h-8 rounded-2xl cursor-pointer"
           />
           <img
             src={imageSet}
